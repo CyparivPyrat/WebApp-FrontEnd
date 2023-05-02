@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="p-t-50">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Book Category(ies)</h2>
+      </div>
+      <div class="col-md-4 t-a-e">
+        <button
+          (click)="addBookCategory(null)"
+          color="primary"
+          mat-raised-button
+          matTooltip="Add Book Category">Add Book Category
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card m-t-20">
+    <div class="card-body">
+      <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+
+        <ng-container matColumnDef="subCategory">
+          <th *matHeaderCellDef mat-header-cell>Sub Category</th>
+          <td *matCellDef="let element" mat-cell> {{element.subCategory}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th *matHeaderCellDef mat-header-cell>Description</th>
+          <td *matCellDef="let element" mat-cell> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef mat-header-cell>
+            Actions
+          </th>
+          <td *matCellDef="let row" mat-cell>
+            <button (click)="view($event, row)" mat-icon-button
+                    matTooltip="View"
+                    type="button">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button (click)="edit($event,row)" mat-icon-button
+                    matTooltip="Edit"
+                    type="button">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button (click)="delete($event,row)" mat-icon-button
+                    matTooltip="Delete"
+                    type="button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+
+    </div>
+  </div>
+</div>

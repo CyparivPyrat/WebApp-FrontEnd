@@ -1,0 +1,144 @@
+<div>
+  <div class="row" style="margin: 10px">
+    <div class="col-md-11 height-30px">
+      <h2>{{title}}</h2>
+    </div>
+    <div class="col-md-1 t-a-e">
+      <button
+        (click)="onCancelClick($event)"
+        aria-label="Close"
+        class="btn-close"
+        type="button">
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row" style="margin: 10px">
+    <form [formGroup]="bookAddEditForm" autocomplete="off" class="kt-form" id="login-form"
+          style="padding-top: 25px;">
+      <div class="row">
+
+        <div class="col-md-6">
+          <mat-form-field style="width: 100%;">
+            <mat-select
+              formControlName="bookCategoryID"
+              placeholder="Category" required>
+              <mat-option *ngFor="let bookCategory of bookCategories"
+                          [value]="bookCategory.bookCategoryID">
+                {{bookCategory.subCategory}}
+                - {{bookCategory.description}}
+              </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="isControlHasError('bookCategoryID','required')">
+              <strong>Required field</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input autocomplete="off"
+                   class="user-name"
+                   formControlName="title"
+                   matInput
+                   placeholder="Title"
+                   type="text"/>
+            <mat-error *ngIf="isControlHasError('title','required')">
+              <strong>Required field</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Author</mat-label>
+            <input autocomplete="off"
+                   class="user-name"
+                   formControlName="author"
+                   matInput
+                   placeholder="Author"
+                   type="text"/>
+            <mat-error *ngIf="isControlHasError('author','required')">
+              <strong>Required field</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field style="width: 100%;">
+            <mat-label>No of Copies</mat-label>
+            <input autocomplete="off"
+                   class="user-name"
+                   formControlName="noOfCopies"
+                   matInput
+                   placeholder="No of Copies"
+                   type="number"/>
+            <mat-error *ngIf="isControlHasError('noOfCopies','required')">
+              <strong>Required field</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Language</mat-label>
+            <input autocomplete="off"
+                   class="user-name"
+                   formControlName="language"
+                   matInput
+                   placeholder="Language"
+                   type="text"/>
+            <mat-error *ngIf="isControlHasError('language','required')">
+              <strong>Required field</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Publication Date</mat-label>
+            <input
+              [matDatepicker]="publicationDateStr" formControlName="publicationDateStr"
+              matInput
+            >
+            <mat-datepicker-toggle [for]="publicationDateStr" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #publicationDateStr></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="row" style="margin: 10px">
+    <div class="col-md-12 t-a-e">
+      <ng-container *ngIf="type != 'VIEW'">
+        <button
+          (click)="onSave($event)"
+          [disabled]="!isFormValid()"
+          class="btn btn-primary"
+          type="button">
+          Save
+        </button>
+      </ng-container>
+      <ng-container>
+        <button
+          (click)="onCancelClick($event)"
+          class="btn btn-secondary m-l-20"
+          type="button">
+          Cancel
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</div>
